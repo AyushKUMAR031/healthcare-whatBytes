@@ -1,6 +1,7 @@
 const { Sequelize } = require('sequelize');
 const User = require('../models/User');
 const Patient = require('../models/Patient');
+const Doctor = require('../models/Doctor');
 
 const sequelize = new Sequelize(process.env.DB_URL, {
   dialect: 'postgres',
