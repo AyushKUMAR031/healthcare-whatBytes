@@ -1,0 +1,14 @@
+- [x] Initialize Node.js project (`npm init`)
+- [x] Install dependencies: `express`, `pg`, `sequelize`, `jsonwebtoken`, `bcrypt`, `dotenv`, `nodemon`
+- [x] Set up **PostgreSQL database** connection
+- [x] Create **User model** (with hashed password)
+- [x] Implement **Register API**
+- [x] Implement **Login API** (JWT generation)
+- [x] Set up **Auth middleware** to protect routes
+- [x] Create **Patient model + CRUD APIs**
+- [x] Create **Doctor model + CRUD APIs**
+- [x] Create **Mapping model + APIs** (patient-doctor relationship)
+- [ ] Add **error handling middleware**
+- [x] Use **environment variables** (`.env`) for secrets and DB config
+- [ ] Test all endpoints in **Postman**
+- [ ] Final check before submission

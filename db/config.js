@@ -2,6 +2,7 @@ const { Sequelize } = require('sequelize');
 const User = require('../models/User');
 const Patient = require('../models/Patient');
 const Doctor = require('../models/Doctor');
+const PatientDoctor = require('../models/PatientDoctor');
 
 const sequelize = new Sequelize(process.env.DB_URL, {
   dialect: 'postgres',
@@ -9,6 +10,9 @@ const sequelize = new Sequelize(process.env.DB_URL, {
 
 User.hasMany(Patient);
 Patient.belongsTo(User);
+
+Patient.belongsToMany(Doctor, { through: PatientDoctor });
+Doctor.belongsToMany(Patient, { through: PatientDoctor });
 
 const connectDB = async () => {
   try {

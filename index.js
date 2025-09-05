@@ -1,9 +1,10 @@
 require('dotenv').config();
 const express = require('express');
-const { connectDB } = require('./db');
+const { connectDB } = require('./db/config');
 const authRoutes = require('./routes/auth');
 const patientRoutes = require('./routes/patients');
 const doctorRoutes = require('./routes/doctors');
+const mappingRoutes = require('./routes/mappings');
 
 const app = express();
 app.use(express.json());
@@ -11,6 +12,7 @@ app.use(express.json());
 app.use('/api/auth', authRoutes);
 app.use('/api/patients', patientRoutes);
 app.use('/api/doctors', doctorRoutes);
+app.use('/api/mappings', mappingRoutes);
 
 app.get('/', (req, res) => {
   res.send('Hello World!');
