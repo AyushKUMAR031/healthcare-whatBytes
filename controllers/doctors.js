@@ -57,4 +57,10 @@ const deleteDoctor = async (req, res) => {
   }
 };
 
-module.exports = { addDoctor, getDoctors, getDoctorById, updateDoctor, deleteDoctor };
+module.exports = { 
+  addDoctor, 
+  getDoctors, 
+  getDoctorById, 
+  updateDoctor, 
+  deleteDoctor 
+};

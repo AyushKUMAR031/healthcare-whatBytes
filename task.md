@@ -1,6 +1,6 @@
-# 📌 Assignment Task: Building a Healthcare Backend
+# Assignment Task: Building a Healthcare Backend
 
-## 🎯 Objective
+## Objective
 
 The goal of this assignment is to create a backend system for a healthcare application using **Node.js**, **Express.js**, and **PostgreSQL**. The system should allow users to register, log in, and manage patient and doctor records securely.
 
@@ -8,7 +8,7 @@ Try To add small git commits for git tracking.
 
 ---
 
-## ⚙️ Requirements
+## Requirements
 
 * Use **Node.js** with **Express.js** for backend.
 * Use **PostgreSQL** as the database (via Sequelize / Prisma / pg).
@@ -20,7 +20,7 @@ Try To add small git commits for git tracking.
 
 ---
 
-## 📡 APIs to be Implemented
+## APIs to be Implemented
 
 ### 1. Authentication APIs
 
@@ -52,7 +52,7 @@ Try To add small git commits for git tracking.
 
 ---
 
-## 🛠️ Instructions
+## Instructions
 
 * Set up a **Node.js project** with **Express.js**.
 * Use **PostgreSQL** with ORM (Sequelize/Prisma).
@@ -63,7 +63,7 @@ Try To add small git commits for git tracking.
 
 ---
 
-## ✅ Expected Outcome
+## Expected Outcome
 
 * Users should be able to **register and log in**.
 * Authenticated users should be able to **add and manage patient and doctor records**.
@@ -72,7 +72,7 @@ Try To add small git commits for git tracking.
 
 ---
 
-## 📋 Developer Checklist
+## Developer Checklist
 
 * [x] Initialize Node.js project (`npm init`)
 * [x] Install dependencies: `express`, `pg`, `sequelize` (or `prisma`), `jsonwebtoken`, `bcrypt`, `dotenv`, `nodemon`

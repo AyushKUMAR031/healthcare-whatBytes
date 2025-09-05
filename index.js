@@ -1,5 +1,8 @@
 require('dotenv').config();
 const express = require('express');
+
+require('./models/relation');  // ensures all models and relationships are loaded
+
 const { connectDB } = require('./db/config');
 const authRoutes = require('./routes/auth');
 const patientRoutes = require('./routes/patients');

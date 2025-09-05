@@ -1,18 +1,10 @@
 const { Sequelize } = require('sequelize');
-const User = require('../models/User');
-const Patient = require('../models/Patient');
-const Doctor = require('../models/Doctor');
-const PatientDoctor = require('../models/PatientDoctor');
+require('dotenv').config();
 
 const sequelize = new Sequelize(process.env.DB_URL, {
   dialect: 'postgres',
+  logging: false,
 });
-
-User.hasMany(Patient);
-Patient.belongsTo(User);
-
-Patient.belongsToMany(Doctor, { through: PatientDoctor });
-Doctor.belongsToMany(Patient, { through: PatientDoctor });
 
 const connectDB = async () => {
   try {

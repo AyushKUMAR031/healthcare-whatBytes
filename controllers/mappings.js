@@ -54,4 +54,9 @@ const removeDoctorFromPatient = async (req, res) => {
   }
 };
 
-module.exports = { assignDoctorToPatient, getMappings, getDoctorsForPatient, removeDoctorFromPatient };
+module.exports = { 
+  assignDoctorToPatient, 
+  getMappings, 
+  getDoctorsForPatient, 
+  removeDoctorFromPatient 
+};
