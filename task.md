@@ -74,18 +74,18 @@ Try To add small git commits for git tracking.
 
 ## 📋 Developer Checklist
 
-* [ ] Initialize Node.js project (`npm init`)
-* [ ] Install dependencies: `express`, `pg`, `sequelize` (or `prisma`), `jsonwebtoken`, `bcrypt`, `dotenv`, `nodemon`
-* [ ] Set up **PostgreSQL database** connection
-* [ ] Create **User model** (with hashed password)
-* [ ] Implement **Register API**
-* [ ] Implement **Login API** (JWT generation)
-* [ ] Set up **Auth middleware** to protect routes
-* [ ] Create **Patient model + CRUD APIs**
-* [ ] Create **Doctor model + CRUD APIs**
-* [ ] Create **Mapping model + APIs** (patient-doctor relationship)
+* [x] Initialize Node.js project (`npm init`)
+* [x] Install dependencies: `express`, `pg`, `sequelize` (or `prisma`), `jsonwebtoken`, `bcrypt`, `dotenv`, `nodemon`
+* [x] Set up **PostgreSQL database** connection
+* [x] Create **User model** (with hashed password)
+* [x] Implement **Register API**
+* [x] Implement **Login API** (JWT generation)
+* [x] Set up **Auth middleware** to protect routes
+* [x] Create **Patient model + CRUD APIs**
+* [x] Create **Doctor model + CRUD APIs**
+* [x] Create **Mapping model + APIs** (patient-doctor relationship)
 * [ ] Add **error handling middleware**
-* [ ] Use **environment variables** (`.env`) for secrets and DB config
+* [x] Use **environment variables** (`.env`) for secrets and DB config
 * [ ] Test all endpoints in **Postman**
 * [ ] Final check before submission
 
