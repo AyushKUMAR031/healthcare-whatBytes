@@ -8,7 +8,7 @@
 - [x] Create **Patient model + CRUD APIs**
 - [x] Create **Doctor model + CRUD APIs**
 - [x] Create **Mapping model + APIs** (patient-doctor relationship)
-- [ ] Add **error handling middleware**
+- [x] Add **error handling middleware**
 - [x] Use **environment variables** (`.env`) for secrets and DB config
 - [ ] Test all endpoints in **Postman**
 - [ ] Final check before submission
