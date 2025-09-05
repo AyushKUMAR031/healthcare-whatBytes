@@ -1,8 +1,13 @@
 const { Sequelize } = require('sequelize');
+const User = require('../models/User');
+const Patient = require('../models/Patient');
 
 const sequelize = new Sequelize(process.env.DB_URL, {
   dialect: 'postgres',
 });
+
+User.hasMany(Patient);
+Patient.belongsTo(User);
 
 const connectDB = async () => {
   try {
