@@ -51,7 +51,7 @@ const deletePatient = async (req, res) => {
       return res.status(404).json({ error: 'Patient not found' });
     }
     await patient.destroy();
-    res.status(204).send();
+    res.status(200).json({ message : "Patient deleted successfully"});
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

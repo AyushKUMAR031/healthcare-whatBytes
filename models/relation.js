@@ -10,4 +10,7 @@ Patient.belongsTo(User);
 Patient.belongsToMany(Doctor, { through: PatientDoctor });
 Doctor.belongsToMany(Patient, { through: PatientDoctor });
 
+PatientDoctor.belongsTo(Patient);
+PatientDoctor.belongsTo(Doctor);
+
 module.exports = { User, Doctor, Patient, PatientDoctor };
