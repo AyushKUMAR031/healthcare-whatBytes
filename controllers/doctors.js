@@ -1,61 +1,45 @@
+const asyncHandler = require('express-async-handler');
 const Doctor = require('../models/Doctor');
 
-const addDoctor = async (req, res) => {
+const addDoctor = asyncHandler(async (req, res) => {
   const { name, specialization } = req.body;
-  try {
-    const doctor = await Doctor.create({ name, specialization });
-    res.status(201).json(doctor);
-  } catch (error) {
-    res.status(400).json({ error: error.message });
-  }
-};
+  const doctor = await Doctor.create({ name, specialization });
+  res.status(201).json(doctor);
+});
 
-const getDoctors = async (req, res) => {
-  try {
-    const doctors = await Doctor.findAll();
-    res.json(doctors);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-};
+const getDoctors = asyncHandler(async (req, res) => {
+  const doctors = await Doctor.findAll();
+  res.json(doctors);
+});
 
-const getDoctorById = async (req, res) => {
-  try {
-    const doctor = await Doctor.findByPk(req.params.id);
-    if (!doctor) {
-      return res.status(404).json({ error: 'Doctor not found' });
-    }
-    res.json(doctor);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
+const getDoctorById = asyncHandler(async (req, res) => {
+  const doctor = await Doctor.findByPk(req.params.id);
+  if (!doctor) {
+    res.status(404);
+    throw new Error('Doctor not found');
   }
-};
+  res.json(doctor);
+});
 
-const updateDoctor = async (req, res) => {
-  try {
-    const doctor = await Doctor.findByPk(req.params.id);
-    if (!doctor) {
-      return res.status(404).json({ error: 'Doctor not found' });
-    }
-    await doctor.update(req.body);
-    res.json(doctor);
-  } catch (error) {
-    res.status(400).json({ error: error.message });
+const updateDoctor = asyncHandler(async (req, res) => {
+  const doctor = await Doctor.findByPk(req.params.id);
+  if (!doctor) {
+    res.status(404);
+    throw new Error('Doctor not found');
   }
-};
+  await doctor.update(req.body);
+  res.json(doctor);
+});
 
-const deleteDoctor = async (req, res) => {
-  try {
-    const doctor = await Doctor.findByPk(req.params.id);
-    if (!doctor) {
-      return res.status(404).json({ error: 'Doctor not found' });
-    }
-    await doctor.destroy();
-    res.status(200).send({ message: "Doctor deleted successfully" });
-  } catch (error) {
-    res.status(500).json({ error: error.message });
+const deleteDoctor = asyncHandler(async (req, res) => {
+  const doctor = await Doctor.findByPk(req.params.id);
+  if (!doctor) {
+    res.status(404);
+    throw new Error('Doctor not found');
   }
-};
+  await doctor.destroy();
+  res.status(200).send({ message: "Doctor deleted successfully" });
+});
 
 module.exports = { 
   addDoctor, 

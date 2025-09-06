@@ -7,6 +7,13 @@ const PatientDoctor = sequelize.define('PatientDoctor', {
     primaryKey: true,
     autoIncrement: true,
   },
+}, {
+  indexes: [
+    {
+      unique: true,
+      fields: ['PatientId', 'DoctorId']
+    }
+  ]
 });
 
 module.exports = PatientDoctor;

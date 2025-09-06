@@ -1,2 +1,7 @@
 node_modules
 .env
+note.md
+willperform.md
+leftout.md
+.vscode
+.DS_Store

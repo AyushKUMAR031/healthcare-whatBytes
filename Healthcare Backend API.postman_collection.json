@@ -1,0 +1,708 @@
+{
+	"info": {
+		"_postman_id": "327fb824-d77f-452e-8fa6-58070fb7082e",
+		"name": "Healthcare Backend API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "41270567"
+	},
+	"item": [
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Register User",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"// Generate random values using Postman's dynamic variables\r",
+									"let email = pm.variables.replaceIn('{{$randomEmail}}');\r",
+									"let fullName = pm.variables.replaceIn('{{$randomFullName}}');\r",
+									"let password = pm.variables.replaceIn('{{$randomPassword}}');\r",
+									"\r",
+									"\r",
+									"// Set the values as collection variables\r",
+									"pm.collectionVariables.set('email', email);\r",
+									"pm.collectionVariables.set('fullName', fullName);\r",
+									"pm.collectionVariables.set('password', password);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"{{fullName}}\",\n  \"email\": \"{{email}}\",\n  \"password\": \"{{password}}\"\n}"
+						},
+						"url": "{{baseUrl}}/api/auth/register"
+					},
+					"response": []
+				},
+				{
+					"name": "Login User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"pm.environment.set('token', jsonData.token);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"{{email}}\",\n  \"password\": \"{{password}}\"\n}"
+						},
+						"url": "{{baseUrl}}/api/auth/login"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Patient Management",
+			"item": [
+				{
+					"name": "Add Patient",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"// Generate random values using Postman's dynamic variables\r",
+									"let patientName = pm.variables.replaceIn('{{$randomFullName}}');\r",
+									"// patient age between 0 to 100\r",
+									"let patientAge = Math.floor(Math.random() * 101);\r",
+									"let patientGender = Math.random() < 0.5 ? 'Male' : 'Female';\r",
+									"\r",
+									"\r",
+									"// Set the values as collection variables\r",
+									"pm.collectionVariables.set('patientName', patientName);\r",
+									"pm.collectionVariables.set('patientAge', patientAge);\r",
+									"pm.collectionVariables.set('patientGender', patientGender);\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"pm.environment.set('patientId', jsonData.id);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"{{patientName}}\",\n  \"age\": {{patientAge}},\n  \"gender\": \"{{patientGender}}\"\n}"
+						},
+						"url": "{{baseUrl}}/api/patients"
+					},
+					"response": []
+				},
+				{
+					"name": "Add Patient 2",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"// Generate random values using Postman's dynamic variables\r",
+									"let patient2Name = pm.variables.replaceIn('{{$randomFullName}}');\r",
+									"// patient age between 0 to 100\r",
+									"let patient2Age = Math.floor(Math.random() * 101);\r",
+									"let patient2Gender = Math.random() < 0.5 ? 'Male' : 'Female';\r",
+									"\r",
+									"\r",
+									"// Set the values as collection variables\r",
+									"pm.collectionVariables.set('patient2Name', patient2Name);\r",
+									"pm.collectionVariables.set('patient2Age', patient2Age);\r",
+									"pm.collectionVariables.set('patient2Gender', patient2Gender);\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"pm.environment.set('patient2Id', jsonData.id);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"{{patient2Name}}\",\n  \"age\": {{patient2Age}},\n  \"gender\": \"{{patient2Gender}}\"\n}"
+						},
+						"url": "{{baseUrl}}/api/patients"
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Patients",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": "{{baseUrl}}/api/patients"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Patient by ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": "{{baseUrl}}/api/patients/{{patientId}}"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Patient",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"let updateName =  pm.variables.replaceIn('{{$randomFullName}}');\r",
+									"let updatePatientAge = Math.floor(Math.random() * 101);\r",
+									"\r",
+									"pm.collectionVariables.set('updateName', updateName);\r",
+									"pm.collectionVariables.set('updatePatientAge', updatePatientAge);\r",
+									"\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"{{updateName}} updated name\",\n  \"age\": {{updatePatientAge}}\n}"
+						},
+						"url": "{{baseUrl}}/api/patients/{{patientId}}"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Patient",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": "{{baseUrl}}/api/patients/{{patientId}}"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Doctor Management",
+			"item": [
+				{
+					"name": "Add Doctor",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"// Generate random values using Postman's dynamic variables\r",
+									"let doctorName = pm.variables.replaceIn('{{$randomFullName}}');\r",
+									"const doctorSpecializations = [\r",
+									"  \"Cardiologist\",\r",
+									"  \"Dermatologist\",\r",
+									"  \"Neurologist\",\r",
+									"  \"Pediatrician\",\r",
+									"  \"Orthopedic\"\r",
+									"];\r",
+									"let doctorSpecialization = doctorSpecializations[Math.floor(Math.random() * doctorSpecializations.length)];\r",
+									"\r",
+									"\r",
+									"// Set the values as collection variables\r",
+									"pm.collectionVariables.set('doctorName', doctorName);\r",
+									"pm.collectionVariables.set('doctorSpecialization', doctorSpecialization);\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"pm.environment.set('doctorId', jsonData.id);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Dr. {{doctorName}}\",\n  \"specialization\": \"{{doctorSpecialization}}\"\n}"
+						},
+						"url": "{{baseUrl}}/api/doctors"
+					},
+					"response": []
+				},
+				{
+					"name": "Add Doctor 2",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"// Generate random values using Postman's dynamic variables\r",
+									"let doctor2Name = pm.variables.replaceIn('{{$randomFullName}}');\r",
+									"const doctor2Specializations = [\r",
+									"  \"Cardiologist\",\r",
+									"  \"Dermatologist\",\r",
+									"  \"Neurologist\",\r",
+									"  \"Pediatrician\",\r",
+									"  \"Orthopedic\"\r",
+									"];\r",
+									"let doctor2Specialization = doctor2Specializations[Math.floor(Math.random() * doctor2Specializations.length)];\r",
+									"\r",
+									"\r",
+									"// Set the values as collection variables\r",
+									"pm.collectionVariables.set('doctor2Name', doctor2Name);\r",
+									"pm.collectionVariables.set('doctor2Specialization', doctor2Specialization);\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"pm.environment.set('doctor2Id', jsonData.id);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Dr. {{doctor2Name}}\",\n  \"specialization\": \"{{doctor2Specialization}}\"\n}"
+						},
+						"url": "{{baseUrl}}/api/doctors"
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Doctors",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": "{{baseUrl}}/api/doctors"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Doctor by ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": "{{baseUrl}}/api/doctors/{{doctorId}}"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Doctor",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"// Generate random values using Postman's dynamic variables\r",
+									"const doctorSpecializations = [\r",
+									"  \"Cardiologist\",\r",
+									"  \"Dermatologist\",\r",
+									"  \"Neurologist\",\r",
+									"  \"Pediatrician\",\r",
+									"  \"Orthopedic\"\r",
+									"];\r",
+									"let doctorSpecialization = doctorSpecializations[Math.floor(Math.random() * doctorSpecializations.length)];\r",
+									"\r",
+									"\r",
+									"// Set the values as collection variables\r",
+									"pm.collectionVariables.set('doctorSpecialization', doctorSpecialization);\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Dr. name updated\",\n  \"specialization\": \"{{doctorSpecialization}} updated\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseUrl}}/api/doctors/{{doctorId}}"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Doctor",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": "{{baseUrl}}/api/doctors/{{doctorId}}"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Patient-Doctor Mapping",
+			"item": [
+				{
+					"name": "Assign Doctor to Patient",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"pm.environment.set('mapping_id', jsonData.mapping.id);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"patientId\": {{patient2Id}},\n  \"doctorId\": {{doctor2Id}}\n}"
+						},
+						"url": "{{baseUrl}}/api/mappings"
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Mappings",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": "{{baseUrl}}/api/mappings"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Doctors for Patient",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": "{{baseUrl}}/api/mappings/{{patient2Id}}"
+					},
+					"response": []
+				},
+				{
+					"name": "Remove Doctor from Patient",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": "{{baseUrl}}/api/mappings/{{mapping_id}}"
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:3000"
+		},
+		{
+			"key": "token",
+			"value": ""
+		},
+		{
+			"key": "email",
+			"value": ""
+		},
+		{
+			"key": "fullName",
+			"value": ""
+		},
+		{
+			"key": "password",
+			"value": ""
+		},
+		{
+			"key": "patientName",
+			"value": ""
+		},
+		{
+			"key": "doctorName",
+			"value": ""
+		},
+		{
+			"key": "doctorSpecialization",
+			"value": ""
+		},
+		{
+			"key": "patientAge",
+			"value": ""
+		},
+		{
+			"key": "patientGender",
+			"value": ""
+		},
+		{
+			"key": "updateName",
+			"value": ""
+		},
+		{
+			"key": "updatePatientAge",
+			"value": ""
+		},
+		{
+			"key": "patient2Name",
+			"value": ""
+		},
+		{
+			"key": "patient2Age",
+			"value": ""
+		},
+		{
+			"key": "patient2Gender",
+			"value": ""
+		},
+		{
+			"key": "doctor2Name",
+			"value": ""
+		},
+		{
+			"key": "doctor2Specialization",
+			"value": ""
+		}
+	]
+}

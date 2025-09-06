@@ -48,7 +48,7 @@ Try To add small git commits for git tracking.
 * `POST /api/mappings/` → Assign a doctor to a patient.
 * `GET /api/mappings/` → Retrieve all patient-doctor mappings.
 * `GET /api/mappings/:patient_id` → Get all doctors assigned to a specific patient.
-* `DELETE /api/mappings/:id` → Remove a doctor from a patient.
+* `DELETE /api/mappings/:patientId/doctors/:doctorId` → Remove a doctor from a patient.
 
 ---
 
@@ -84,9 +84,13 @@ Try To add small git commits for git tracking.
 * [x] Create **Patient model + CRUD APIs**
 * [x] Create **Doctor model + CRUD APIs**
 * [x] Create **Mapping model + APIs** (patient-doctor relationship)
-* [ ] Add **error handling middleware**
+* [x] Add **error handling middleware** and refactor controllers to use it.
 * [x] Use **environment variables** (`.env`) for secrets and DB config
+* [x] Implement **input validation** for auth routes.
+* [x] Add unique constraint to `PatientDoctor` model to prevent duplicate mappings.
+* [x] Add `onDelete: 'CASCADE'` to `PatientDoctor` associations.
+* [x] Protect doctor routes.
+* [x] Make `removeDoctorFromPatient` route RESTful.
 * [ ] Test all endpoints in **Postman**
-* [ ] Final check before submission
 
 ---
